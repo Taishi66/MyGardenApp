@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.oogiboogi66.mygarden.MainActivity
 import fr.oogiboogi66.mygarden.PlantModel
+import fr.oogiboogi66.mygarden.PlantRepository
 import fr.oogiboogi66.mygarden.R
 
 class PlantAdapter (
@@ -37,6 +38,9 @@ class PlantAdapter (
         //réupérer les infos de la plante
         val currentPlant = plantList[position]
 
+        //recupérer le repository
+        val repo = PlantRepository()
+
         //utiliser glide pour recupérer l'img à partir de son lien -> composant
         Glide.with(context).load(Uri.parse(currentPlant.imageUrl)).into(holder.plantImage)
 
@@ -51,6 +55,13 @@ class PlantAdapter (
             holder.starIcon.setImageResource(R.drawable.ic_like)
         } else{
             holder.starIcon.setImageResource(R.drawable.ic_unlike)
+        }
+        // rajouter une interaction sur cette étoile
+        holder.starIcon.setOnClickListener{
+            //inverser si le button est like ou non
+            (!currentPlant.liked).also { currentPlant.liked = it }
+            //mettre à jour l'objet plant
+            repo.updatePlant(currentPlant)
         }
     }
 
