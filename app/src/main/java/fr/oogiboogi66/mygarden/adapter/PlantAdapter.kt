@@ -8,13 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import fr.oogiboogi66.mygarden.MainActivity
-import fr.oogiboogi66.mygarden.PlantModel
-import fr.oogiboogi66.mygarden.PlantRepository
-import fr.oogiboogi66.mygarden.R
+import fr.oogiboogi66.mygarden.*
 
 class PlantAdapter (
-    private val context : MainActivity,
+    val context : MainActivity,
     private val plantList : List<PlantModel>,
     private val layoutId : Int
     ): RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
@@ -62,6 +59,11 @@ class PlantAdapter (
             (!currentPlant.liked).also { currentPlant.liked = it }
             //mettre à jour l'objet plant
             repo.updatePlant(currentPlant)
+        }
+        //interaction lors du click sur une plante
+        holder.itemView.setOnClickListener{
+            //Afficher la popup
+            PlantPopup(this, currentPlant).show()
         }
     }
 
