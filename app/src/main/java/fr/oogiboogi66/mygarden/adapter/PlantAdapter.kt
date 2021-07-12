@@ -5,9 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import fr.oogiboogi66.mygarden.PlantModel
 import fr.oogiboogi66.mygarden.R
 
-class PlantAdapter (private val layoutId : Int): RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
+class PlantAdapter (
+    private val plantList : List<PlantModel>,
+    private val layoutId : Int
+    ): RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
     //boite pour ranger tout les composants à controler
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val plantImage = view.findViewById<ImageView>(R.id.image_item)
@@ -22,9 +26,10 @@ class PlantAdapter (private val layoutId : Int): RecyclerView.Adapter<PlantAdapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        
+        //réupérer les infos de la plante
+        val currentPlant = plantList[position]
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = plantList.size
 
 }
