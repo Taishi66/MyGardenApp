@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nadia\'s Garden</string>
 
@@ -11,8 +12,8 @@
     <!-- Page d'ajout de plante -->
     <string name="add_plant_page">Ajout d\'une plante</string>
     <string name="add_plant_page_upload_button">Charger Image</string>
-    <string name="add_plant_page_name_input">@string/home_page_plant_name</string>
-    <string name="add_plant_page_description_input">@string/home_page_plant_description</string>
+    <string name="add_plant_page_name_input">@string/item_plant_name</string>
+    <string name="add_plant_page_description_input">@string/item_plant_description</string>
 
     <string-array name="add_plant_page_grow_spinner_input">
         <item>Croissance : lente</item>
@@ -38,8 +39,8 @@
     <string name="popup_plant_water_subtitle">Faible</string>
 
     <!-- Plante customisée -->
-    <string name="home_page_plant_name">Nom de la plante</string>
-    <string name="home_page_plant_description">Description de la plante</string>
+    <string name="item_plant_name">Nom de la plante</string>
+    <string name="item_plant_description">Description de la plante</string>
 
 
 
