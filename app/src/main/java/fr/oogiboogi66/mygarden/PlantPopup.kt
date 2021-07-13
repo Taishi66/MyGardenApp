@@ -27,9 +27,9 @@ class PlantPopup(
 
     private fun updateStar(button: ImageView){
         if(currentPlant.liked){
-            button.setImageResource(R.drawable.ic_unlike)
-        } else{
             button.setImageResource(R.drawable.ic_like)
+        } else{
+            button.setImageResource(R.drawable.ic_unlike)
         }
     }
 

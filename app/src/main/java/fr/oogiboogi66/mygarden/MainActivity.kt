@@ -2,6 +2,8 @@ package fr.oogiboogi66.mygarden
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import fr.oogiboogi66.mygarden.fragments.AddPlantFragment
+import fr.oogiboogi66.mygarden.fragments.CollectionFragment
 import fr.oogiboogi66.mygarden.fragments.HomeFragment
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         repo.updateData{
             //injecter le fragment dans notre boite (fragment_container
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, HomeFragment(this))
+            transaction.replace(R.id.fragment_container, AddPlantFragment(this))
             transaction.addToBackStack(null)
             transaction.commit()
         }
