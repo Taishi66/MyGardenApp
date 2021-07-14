@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import fr.oogiboogi66.mygarden.PlantRepository.Singleton.databaseRef
+import fr.oogiboogi66.mygarden.PlantRepository.Singleton.downloadUri
 import fr.oogiboogi66.mygarden.PlantRepository.Singleton.plantList
 import fr.oogiboogi66.mygarden.PlantRepository.Singleton.storageReference
 import java.net.URI
@@ -29,6 +30,9 @@ class PlantRepository  {
         val databaseRef = FirebaseDatabase.getInstance("https://my-garden-f8e1f-default-rtdb.firebaseio.com/").getReference("plants")
         //créer une liste qui va contenir nos plantes
         val plantList = arrayListOf<PlantModel>()
+
+        //contenir le lien de l'image courante
+        var downloadUri : Uri? = null
     }
 
     fun updateData(callback: () -> Unit){
@@ -59,20 +63,39 @@ class PlantRepository  {
         })
     }
     // créer une fonction pour envoyer des fichiers sur le storage
-    fun uploadedImage(file: Uri){
+    fun uploadedImage(file: Uri, callback: () -> Unit){
         // verifier que ce fichier n'est pas null
         if (file != null){
             val filename = UUID.randomUUID().toString() + ".jpg"
             val ref = storageReference.child(filename)
             val uploadTask = ref.putFile(file)
 
-            //démarrer la tache d'envoie
+            uploadTask.continueWithTask(com.google.android.gms.tasks.Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let { throw it }
+                }
+                return@Continuation ref.downloadUrl
+
+            }).addOnCompleteListener{ task ->
+                //verifier si tout a bien fonctionné
+                if (task.isSuccessful){
+                    //recupérer l'img
+                    downloadUri = task.result
+                    callback()
+                }
+            }
+
+
               }
         }
     
 
     //mettre à jour l'objet plante
     fun updatePlant(plant:PlantModel) = databaseRef.child(plant.id).setValue(plant)
+
+    //inserer une nouvelle plante en bdd
+    fun insertPlant(plant:PlantModel) = databaseRef.child(plant.id).setValue(plant)
+
     //supprimer une plante de la base
     fun deletePlant(plant:PlantModel) = databaseRef.child(plant.id).removeValue()
 }
