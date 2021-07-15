@@ -24,14 +24,14 @@ class AddPlantFragment(
 ): Fragment() {
 
     private val file: Uri? = null
-    private var uploadedImage : ImageView? = null
+    private var uploadedImage : ImageView? =null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater?.inflate(R.layout.fragment_add_plant, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_plant, container, false)
 
         //recuperer uploadedImage pour lui assoicer son composant
         uploadedImage = view.findViewById(R.id.preview_image)
@@ -73,6 +73,7 @@ class AddPlantFragment(
              repo.insertPlant(plant)
 
         }
+
 
 
     }

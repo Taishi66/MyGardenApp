@@ -8,6 +8,10 @@
 
     <!-- Page de collection -->
     <string name="collection_page">Ma collection</string>
+    
+    <string name="bottom_home_item">Accueil</string>
+    <string name="bottom_collection_item">Collection</string>
+    <string name="bottom_add_plant_item">Ajouter</string>
 
     <!-- Page d'ajout de plante -->
     <string name="add_plant_page">Ajout d\'une plante</string>
